@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 
-@Component
+//@Component //comment this out to prevent this route being used and use another instead
 public class MyFirstTimerRouter extends RouteBuilder {
 
     @Autowired

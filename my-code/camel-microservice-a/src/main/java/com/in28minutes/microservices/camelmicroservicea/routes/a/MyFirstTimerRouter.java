@@ -1,5 +1,7 @@
 package com.in28minutes.microservices.camelmicroservicea.routes.a;
 
+import org.apache.camel.Exchange;
+import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,14 +23,16 @@ public class MyFirstTimerRouter extends RouteBuilder {
     public void configure() throws Exception {
         from("timer:first-timer")
                 .log("${body}")
-                .transform().constant("My Constant Message")
+                .transform().constant("My Constant Message") //transformation
                 .log("${body}")
                 //.transform().constant("Time now is " + LocalDateTime.now())
                 //.bean("getCurrentTimeBean")
                 //.bean(getCurrentTimeBean, "getCurrentTime") //we can specify the method, but it's not necessary when the class has only one method
-                .bean(getCurrentTimeBean)
+                .bean(getCurrentTimeBean) //transformation
                 .log("${body}")
-                .bean(loggingComponent)
+                .bean(loggingComponent) //processing
+                .log("${body}")
+                .process(new SimpleLoggingProcessor()) //processing
                 .log("${body}")
                 .to("log:first-timer");
     }
@@ -50,4 +54,15 @@ class SimpleLoggingProcessingComponent {
     public void process(String message) {
         logger.info("SimpleLoggingProcessingComponent {}", message);
     }
+}
+
+class SimpleLoggingProcessor implements Processor {
+
+    private Logger logger = LoggerFactory.getLogger(SimpleLoggingProcessingComponent.class);
+
+    @Override
+    public void process(Exchange exchange) throws Exception {
+        logger.info("SimpleLoggingProcessor {}", exchange.getMessage().getBody());
+    }
+
 }

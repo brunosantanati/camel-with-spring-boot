@@ -15,11 +15,14 @@ public class MyFirstTimerRouter extends RouteBuilder {
     @Override
     public void configure() throws Exception {
         from("timer:first-timer")
-                //.transform().constant("My Constant Message")
+                .log("${body}")
+                .transform().constant("My Constant Message")
+                .log("${body}")
                 //.transform().constant("Time now is " + LocalDateTime.now())
                 //.bean("getCurrentTimeBean")
                 //.bean(getCurrentTimeBean, "getCurrentTime") //we can specify the method, but it's not necessary when the class has only one method
                 .bean(getCurrentTimeBean)
+                .log("${body}")
                 .to("log:first-timer");
     }
 

@@ -9,6 +9,7 @@ public class MyFirstTimerRouter extends RouteBuilder {
     @Override
     public void configure() throws Exception {
         from("timer:first-timer")
+                .transform().constant("My Constant Message")
                 .to("log:first-timer");
     }
 

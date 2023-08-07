@@ -23,10 +23,10 @@ public class MyFileRouter extends RouteBuilder {
     @Override
     public void configure() throws Exception {
         from("file:files/input")
-                .pipeline() //default
+                .pipeline() //default -> Pipeline Pattern
                 .routeId("Files-Input-Route")
                 .transform().body(String.class)
-                .choice()
+                .choice() // Content Based Routing Pattern
                     //.when(simple("${file:ext} ends with 'xml'"))
                     .when(simple("${file:ext} == 'xml'"))
                         .log("XML FILE")

@@ -17,6 +17,9 @@ public class EipPatternsRouter extends RouteBuilder {
         from("file:files/csv")
                 .unmarshal().csv()
                 .split(body())
-                .to("log:split-files");
+                //.to("log:split-files");
+                .transform().body(String.class) //I needed to put this line as a way around the RuntimeCamelException
+                .log("${body}")
+                .to("activemq:split-queue");
     }
 }

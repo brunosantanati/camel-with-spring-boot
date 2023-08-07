@@ -13,4 +13,16 @@ docker run -p 61616:61616 -p 8161:8161 rmohr/activemq
 After running the container you should access:
 http://0.0.0.0:8161/
 and click "Manage ActiveMQ broker". Use admin for both user and pass.
+
+Start Kafka
+docker-compose up
+This command should be run in the folder where you have the docker-compose.yaml file.
+
+Solve 'java.net.UnknownHostException: bc3cf810fa4e'
+In the video we are told to edit the file:
+sudo vi /private/etc/hosts
+but in my case, I needed to edit this one:
+sudo vi /etc/hosts
+I just added this line to get the Kafka consumer application to work:
+127.0.1.1       bc3cf810fa4e
 ``` 

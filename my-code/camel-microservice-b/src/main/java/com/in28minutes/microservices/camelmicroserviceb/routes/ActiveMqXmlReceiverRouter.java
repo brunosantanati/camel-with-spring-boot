@@ -5,7 +5,7 @@ import org.apache.camel.builder.RouteBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-@Component
+//@Component //comment it out to prevent generating a lot of logs related to Kafka
 public class ActiveMqXmlReceiverRouter extends RouteBuilder {
 
     @Autowired

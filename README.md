@@ -3,7 +3,8 @@
 ## Links
 
 [Links Downloads](https://github.com/in28minutes/course-material/blob/main/08-apache-camel/downloads.md)  
-[GitHub repo](https://github.com/in28minutes/camel) 
+[GitHub repo](https://github.com/in28minutes/camel)  
+[Camel Simple Language](https://camel.apache.org/components/3.21.x/languages/simple-language.html)  
 
 ## Commands used in the course  
 

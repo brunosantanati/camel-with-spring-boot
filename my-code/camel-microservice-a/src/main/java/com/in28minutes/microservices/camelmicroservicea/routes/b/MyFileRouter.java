@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Map;
 
-@Component //comment this out to prevent this route being used and use another instead
+//@Component //comment this out to prevent this route being used and use another instead
 public class MyFileRouter extends RouteBuilder {
 
     @Autowired
@@ -23,6 +23,7 @@ public class MyFileRouter extends RouteBuilder {
     @Override
     public void configure() throws Exception {
         from("file:files/input")
+                .pipeline() //default
                 .routeId("Files-Input-Route")
                 .transform().body(String.class)
                 .choice()

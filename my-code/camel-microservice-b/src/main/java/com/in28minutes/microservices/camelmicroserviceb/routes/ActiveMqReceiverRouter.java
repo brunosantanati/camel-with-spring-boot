@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 
-//@Component //comment it out to prevent generating a lot of logs related to Kafka
+//@Component //comment it out to prevent generating a lot of logs
 public class ActiveMqReceiverRouter extends RouteBuilder {
 
     @Autowired

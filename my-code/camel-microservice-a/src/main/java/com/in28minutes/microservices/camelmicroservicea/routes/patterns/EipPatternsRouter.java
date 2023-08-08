@@ -1,13 +1,37 @@
 package com.in28minutes.microservices.camelmicroservicea.routes.patterns;
 
+import com.in28minutes.microservices.camelmicroservicea.CurrencyExchange;
+import org.apache.camel.AggregationStrategy;
+import org.apache.camel.Exchange;
 import org.apache.camel.builder.RouteBuilder;
+import org.apache.camel.model.dataformat.JsonLibrary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
 public class EipPatternsRouter extends RouteBuilder {
+
+    public class ArrayListAggregationStrategy implements AggregationStrategy {
+
+        @Override
+        public Exchange aggregate(Exchange oldExchange, Exchange newExchange) {
+            Object newBody = newExchange.getIn().getBody();
+            ArrayList<Object> list = null;
+            if (oldExchange == null) {
+                list = new ArrayList<Object>();
+                list.add(newBody);
+                newExchange.getIn().setBody(list);
+                return newExchange;
+            } else {
+                list = oldExchange.getIn().getBody(ArrayList.class);
+                list.add(newBody);
+                return oldExchange;
+            }
+        }
+    }
 
     @Autowired
     SplitterComponent splitter;
@@ -36,11 +60,19 @@ public class EipPatternsRouter extends RouteBuilder {
                 .to("activemq:split-queue");*/
 
         // Splitter Pattern - example 3 using a custom splitter
-        from("file:files/csv")
+        /*from("file:files/csv")
                 .convertBodyTo(String.class)
                 .split(method(splitter))
                 .log("${body}")
-                .to("activemq:split-queue");
+                .to("activemq:split-queue");*/
+
+        // Aggregation Enterprise Integration Pattern
+        from("file:files/aggregate-json")
+                .unmarshal().json(JsonLibrary.Jackson, CurrencyExchange.class)
+                .aggregate(simple("${body.to}"), new ArrayListAggregationStrategy())
+                .completionSize(3)
+                //.completionTimeout(HIGHEST)
+                .to("log:aggregate-json");
     }
 }
 

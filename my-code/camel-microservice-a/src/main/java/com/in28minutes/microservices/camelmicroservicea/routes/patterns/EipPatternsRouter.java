@@ -14,25 +14,6 @@ import java.util.List;
 @Component
 public class EipPatternsRouter extends RouteBuilder {
 
-    public class ArrayListAggregationStrategy implements AggregationStrategy {
-
-        @Override
-        public Exchange aggregate(Exchange oldExchange, Exchange newExchange) {
-            Object newBody = newExchange.getIn().getBody();
-            ArrayList<Object> list = null;
-            if (oldExchange == null) {
-                list = new ArrayList<Object>();
-                list.add(newBody);
-                newExchange.getIn().setBody(list);
-                return newExchange;
-            } else {
-                list = oldExchange.getIn().getBody(ArrayList.class);
-                list.add(newBody);
-                return oldExchange;
-            }
-        }
-    }
-
     @Autowired
     SplitterComponent splitter;
     @Override
@@ -67,15 +48,15 @@ public class EipPatternsRouter extends RouteBuilder {
                 .to("activemq:split-queue");*/
 
         // Aggregation Enterprise Integration Pattern
-        /*from("file:files/aggregate-json")
+        from("file:files/aggregate-json")
                 .unmarshal().json(JsonLibrary.Jackson, CurrencyExchange.class)
                 .aggregate(simple("${body.to}"), new ArrayListAggregationStrategy())
                 .completionSize(3)
                 //.completionTimeout(HIGHEST)
-                .to("log:aggregate-json");*/
+                .to("log:aggregate-json");
 
         // Routing Slip Enterprise Integration Pattern
-        String routingSlip = "direct:endpoint1, direct:endpoint3";
+        /*String routingSlip = "direct:endpoint1, direct:endpoint3";
 
         from("timer:routingSlip?period=10000")
                 .transform().constant("My message is hardcoded")
@@ -88,7 +69,7 @@ public class EipPatternsRouter extends RouteBuilder {
                 .to("log:direct-endpoint2");
 
         from("direct:endpoint3")
-                .to("log:direct-endpoint3");
+                .to("log:direct-endpoint3");*/
     }
 }
 

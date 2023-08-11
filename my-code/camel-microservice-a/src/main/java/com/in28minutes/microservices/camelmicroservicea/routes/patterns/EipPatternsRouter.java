@@ -78,12 +78,12 @@ public class EipPatternsRouter extends RouteBuilder {
                 .to("log:direct-endpoint3");*/
 
         // Dynamic Routing Enterprise Integration Pattern
-        from("timer:dynamicRouting?period=10000")
+        from("timer:dynamicRouting?period={{timePeriod}}") // Use property from application.properties
                 .transform().constant("My message is hardcoded")
                 .dynamicRouter(method(dynamicRouterBean));
 
         from("direct:endpoint1")
-                .to("log:direct-endpoint1");
+                .to("{{endpoint-for-logging}}"); // Use property from application.properties
 
         from("direct:endpoint2")
                 .to("log:direct-endpoint2");

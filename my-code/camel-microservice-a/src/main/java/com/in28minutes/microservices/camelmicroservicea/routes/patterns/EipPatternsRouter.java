@@ -87,6 +87,7 @@ public class EipPatternsRouter extends RouteBuilder {
         //errorHandler(deadLetterChannel("activemq:dead-letter-queue")); // Enable a Dead Letter Queue
 
         from("direct:endpoint1")
+                .wireTap("log:wire-tap") // Add an extra step
                 .to("{{endpoint-for-logging}}"); // Use property from application.properties
 
         from("direct:endpoint2")

@@ -28,11 +28,13 @@ I just added this line to get the Kafka consumer application to work:
 127.0.1.1       bc3cf810fa4e
 ``` 
 
-## MAKING SURE CAMEL CONTEXT IS RUNNING IN STANDALONE SPRING BOOT  
+## Making sure Camel Context is running in Standalone Spring Boot
 
 [Link Doc](https://camel.apache.org/camel-spring-boot/3.21.x/#_making_sure_camel_context_is_running_in_standalone_spring_boot)  
 
 To ensure the Spring Boot application keeps running until being stopped or the JVM terminated, typically only need when running Spring Boot standalone, i.e. not with spring-boot-starter-web when the web container keeps the JVM running, set the camel.springboot.main-run-controller=true property in your configuration. For example in application.properties.  
 
+```
 # to keep the JVM running  
 camel.springboot.main-run-controller = true  
+```

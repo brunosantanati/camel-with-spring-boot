@@ -84,6 +84,8 @@ public class EipPatternsRouter extends RouteBuilder {
 
         //getContext().setTracing(true); // Enable tracing to help troubleshooting something
 
+        //errorHandler(deadLetterChannel("activemq:dead-letter-queue")); // Enable a Dead Letter Queue
+
         from("direct:endpoint1")
                 .to("{{endpoint-for-logging}}"); // Use property from application.properties
 

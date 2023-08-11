@@ -82,6 +82,8 @@ public class EipPatternsRouter extends RouteBuilder {
                 .transform().constant("My message is hardcoded")
                 .dynamicRouter(method(dynamicRouterBean));
 
+        //getContext().setTracing(true); // Enable tracing to help troubleshooting something
+
         from("direct:endpoint1")
                 .to("{{endpoint-for-logging}}"); // Use property from application.properties
 

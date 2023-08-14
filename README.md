@@ -26,6 +26,9 @@ but in my case, I needed to edit this one:
 sudo vi /etc/hosts
 I just added this line to get the Kafka consumer application to work:
 127.0.1.1       bc3cf810fa4e
+
+Create Key Store
+keytool -genseckey -alias myDesKey -keypass someKeyPassword -keystore myDesKey.jceks -storepass someKeystorePassword -v -storetype JCEKS -keyalg DES
 ``` 
 
 ## Making sure Camel Context is running in Standalone Spring Boot

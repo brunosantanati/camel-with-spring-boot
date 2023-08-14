@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-@Component
+//@Component //comment this out to prevent this route being used and use another instead
 public class EipPatternsRouter extends RouteBuilder {
 
     @Autowired

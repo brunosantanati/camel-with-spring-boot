@@ -41,3 +41,41 @@ To ensure the Spring Boot application keeps running until being stopped or the J
 # to keep the JVM running  
 camel.springboot.main-run-controller = true  
 ```
+
+## Docker Commands
+```
+Check Docker version
+docker --version
+
+Run container based on custom course image
+docker run in28min/todo-rest-api-h2:1.0.0.RELEASE
+docker run -p 5000:5000 in28min/todo-rest-api-h2:1.0.0.RELEASE
+docker run -p 5000:5000 -d in28min/todo-rest-api-h2:1.0.0.RELEASE
+After running this container you can access:
+http://localhost:5000/hello-world
+http://localhost:5000/hello-world-bean
+http://localhost:5000/jpa/users/in28minutes/todos
+docker run -p 5001:5000 -d in28min/todo-rest-api-h2:1.0.0.RELEASE
+You can access the same previous URLs but now using port 5001.
+
+See container logs
+docker logs a1882f58b3d9f0d0da0df8d68da78d4a53ff51a6e17e267e2a23c9f49f63ace3
+We can use just part of the container ID:
+docker logs -f e8fe36
+
+See container logs and follow changes in logs
+docker logs -f a1882f58b3d9f0d0da0df8d68da78d4a53ff51a6e17e267e2a23c9f49f63ace3
+
+List running containers
+docker container ls
+
+List all containers (running and stopped ones)
+docker container ls -a
+
+List local images
+docker images
+
+Stop container
+docker container stop e8fe
+docker container stop a188
+```

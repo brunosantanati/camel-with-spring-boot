@@ -120,4 +120,23 @@ docker container prune
 Restart policy
 docker run -p 5000:5000 -d --restart=always in28min/todo-rest-api-h2:1.0.0.RELEASE
 docker run -p 5001:5000 -d --restart=no in28min/todo-rest-api-h2:1.0.0.RELEASE
+
+See Docker events (you need to run other Docker commands in another tab in order to see something)
+docker events
+
+See running processes in the container
+docker top 3143
+
+Statistics related to containers
+docker stats
+
+Define memory and CPU for a container
+docker run -p 5001:5000 -m 512m --cpu-quota 5000  -d in28min/todo-rest-api-h2:1.0.0.RELEASE
+docker run -p 5001:5000 -m 1G --cpu-quota 50000  -d in28min/todo-rest-api-h2:1.0.0.RELEASE
+CPU quota configuration meaning:
+100000 = 100%
+5000 = 5%
+
+See general info (quantity of containers, images, etc)
+docker system df
 ```

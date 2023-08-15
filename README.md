@@ -78,9 +78,12 @@ docker container ls -a
 List local images
 docker images
 
-Stop container
+Stop container (SIGTERM - graceful shutdown)
 docker container stop e8fe
 docker container stop a188
+
+Kill container (SIGKILL - NO graceful shutdown)
+docker container kill 0b08
 
 Create a tag latest for in28min/todo-rest-api-h2:1.0.0.RELEASE
 docker tag in28min/todo-rest-api-h2:1.0.0.RELEASE in28min/todo-rest-api-h2:latest
@@ -101,5 +104,20 @@ docker image inspect 99afc808f15b
 
 Remove image
 docker image remove 99afc808f15b
+
+Pause a container
+docker container pause 0b08
+
+Unpause a container
+docker container unpause 0b08
+
+See info about the container
+docker container inspect 0b08
+
+Remove all stopped containers
+docker container prune
+
+Restart policy
+docker run -p 5000:5000 -d --restart=always in28min/todo-rest-api-h2:1.0.0.RELEASE
+docker run -p 5001:5000 -d --restart=no in28min/todo-rest-api-h2:1.0.0.RELEASE
 ```
-<!--- I followed lessons until Step 7, continue from Step 8 --->

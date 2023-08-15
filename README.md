@@ -58,6 +58,9 @@ http://localhost:5000/jpa/users/in28minutes/todos
 docker run -p 5001:5000 -d in28min/todo-rest-api-h2:1.0.0.RELEASE
 You can access the same previous URLs but now using port 5001.
 
+Run a container with a different version of the custom image
+docker run -p 5001:5000 -d in28min/todo-rest-api-h2:0.0.1-SNAPSHOT
+
 See container logs
 docker logs a1882f58b3d9f0d0da0df8d68da78d4a53ff51a6e17e267e2a23c9f49f63ace3
 We can use just part of the container ID:

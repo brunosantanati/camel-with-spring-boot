@@ -81,4 +81,25 @@ docker images
 Stop container
 docker container stop e8fe
 docker container stop a188
+
+Create a tag latest for in28min/todo-rest-api-h2:1.0.0.RELEASE
+docker tag in28min/todo-rest-api-h2:1.0.0.RELEASE in28min/todo-rest-api-h2:latest
+
+Pull MySQL image (it uses the latest tag by default)
+docker pull mysql
+
+Search by images (in this case all related to MySQL)
+docker search mysql
+
+Steps taken to create the image
+docker image history <image-id>
+Eg.:
+docker image history 99afc808f15b
+
+See info about the image
+docker image inspect 99afc808f15b
+
+Remove image
+docker image remove 99afc808f15b
 ```
+<!--- I followed lessons until Step 7, continue from Step 8 --->
